@@ -6,8 +6,8 @@
   <title>소중한 소식</title>
 
   <!-- 카톡 미리보기 -->
-  <meta property="og:title" content="잠깐만 시간 괜찮아? 😊">
-  <meta property="og:description" content="꼭 전하고 싶은 얘기가 있어요">
+  <meta property="og:title" content="전해드릴 말씀이 있습니다">
+  <meta property="og:description" content="잠시만 시간 내어 확인 부탁드립니다">
   <meta property="og:image" content="썸네일이미지URL">
 
   <style>
@@ -16,11 +16,11 @@
       font-family: 'Apple SD Gothic Neo', sans-serif;
     }
 
-    /* 🔹 인트로 화면 */
+    /* 🔹 인트로 */
     .intro {
       height: 100vh;
-      background: #111; /* 👉 여기 색 바꾸면 분위기 바뀜 */
-      color: white;
+      background: #ffffff;
+      color: #333;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -30,25 +30,25 @@
     }
 
     .intro h1 {
-      font-size: 24px;
+      font-size: 22px;
       margin-bottom: 10px;
+      font-weight: 500;
     }
 
     .intro p {
-      font-size: 16px;
-      opacity: 0.8;
+      font-size: 15px;
+      color: #666;
     }
 
-    /* 🔹 버튼 */
     button {
       margin-top: 30px;
-      padding: 15px;
+      padding: 14px;
       width: 220px;
-      font-size: 16px;
-      background: #ff7a8a;
+      font-size: 15px;
+      background: #888;
       color: white;
       border: none;
-      border-radius: 12px;
+      border-radius: 10px;
       cursor: pointer;
     }
 
@@ -63,25 +63,25 @@
       max-width: 500px;
       margin: 0 auto;
       text-align: center;
-      background: linear-gradient(#fff5f7, #ffffff);
+      background: #ffffff;
       min-height: 100vh;
       animation: fadeIn 1.5s;
     }
 
     .container h1 {
       font-size: 24px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     .message {
       margin-top: 20px;
-      font-size: 18px;
-      line-height: 1.6;
+      font-size: 17px;
+      line-height: 1.7;
     }
 
     video, img {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 10px;
       margin-top: 15px;
     }
 
@@ -94,20 +94,21 @@
 
 <body>
 
-  <!-- 🔥 인트로 -->
+  <!-- 🔹 인트로 -->
   <div id="intro" class="intro">
-    <h1>잠깐만 시간 괜찮아?</h1>
-    <p>우리 얘기 하나만 들어줄래 😊</p>
+    <h1>전해드릴 말씀이 있습니다</h1>
+    <p>잠시만 시간 내어 확인 부탁드립니다</p>
     <button onclick="reveal()">확인하기</button>
   </div>
 
-  <!-- 🎉 공개 영역 -->
+  <!-- 🔹 공개 -->
   <div id="content" class="container">
-    <h1>👶 아기가 찾아왔어요!</h1>
+    <h1>👶 새로운 가족이 찾아왔습니다</h1>
 
     <p class="message">
-      저희에게 정말 소중한 선물이 찾아왔습니다 💕<br>
-      따뜻하게 지켜봐 주세요
+      저희에게 소중한 생명이 찾아왔습니다.<br>
+      기쁜 마음으로 이 소식을 전해드립니다.<br><br>
+      따뜻한 마음으로 지켜봐 주시면 감사하겠습니다.
     </p>
 
     <!-- 🎬 영상 -->
@@ -120,7 +121,7 @@
     <img src="photo2.jpg">
 
     <p class="message">
-      2026년, 우리에게 찾아온 기적 ✨
+      늘 건강하게 잘 준비하겠습니다 😊
     </p>
   </div>
 
@@ -130,8 +131,6 @@
 
       const content = document.getElementById("content");
       content.style.display = "block";
-
-      // 👇 자연스럽게 스크롤
       content.scrollIntoView({ behavior: "smooth" });
     }
   </script>
