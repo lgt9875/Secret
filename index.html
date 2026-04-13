@@ -1,10 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <title>내 페이지</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소중한 소식</title>
+
+  <!-- 카톡 미리보기 -->
+  <meta property="og:title" content="저희에게 소중한 소식이 있어요 💕">
+  <meta property="og:description" content="클릭해서 확인해 주세요 😊">
+  <meta property="og:image" content="썸네일이미지URL">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Apple SD Gothic Neo', sans-serif;
+      background: linear-gradient(#fff5f7, #ffffff);
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      padding: 40px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 15px;
+      width: 100%;
+      font-size: 18px;
+      background: #ff7a8a;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    #content {
+      display: none;
+      margin-top: 30px;
+      animation: fadeIn 1.5s;
+    }
+
+    video, img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
 </head>
+
 <body>
-  <h1>안녕하세요!</h1>
-  <p>이건 카톡으로 공유되는 웹페이지입니다 👍</p>
+
+  <div class="container">
+    <h1>💌 저희에게 할 말이 있어요</h1>
+    <p>잠깐만 시간 내서 확인해 주세요 😊</p>
+
+    <button onclick="reveal()">확인하기</button>
+
+    <div id="content">
+      <h1>👶 아기가 찾아왔어요!</h1>
+
+      <p class="message">
+        저희에게 정말 소중한 선물이 찾아왔습니다 💕<br>
+        따뜻하게 지켜봐 주세요
+      </p>
+
+      <!-- 🎬 영상 -->
+      <video controls>
+        <source src="video.mp4" type="video/mp4">
+      </video>
+
+      <!-- 🖼 사진 -->
+      <img src="photo1.jpg">
+      <img src="photo2.jpg">
+
+      <p class="message">
+        2026년, 우리에게 찾아온 기적 ✨
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function reveal() {
+      document.getElementById("content").style.display = "block";
+    }
+  </script>
+
 </body>
 </html>
