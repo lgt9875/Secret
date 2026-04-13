@@ -6,40 +6,45 @@
   <title>소중한 소식</title>
 
   <!-- 카톡 미리보기 -->
-  <meta property="og:title" content="저희에게 소중한 소식이 있어요 💕">
-  <meta property="og:description" content="클릭해서 확인해 주세요 😊">
+  <meta property="og:title" content="잠깐만 시간 괜찮아? 😊">
+  <meta property="og:description" content="꼭 전하고 싶은 얘기가 있어요">
   <meta property="og:image" content="썸네일이미지URL">
 
   <style>
     body {
       margin: 0;
       font-family: 'Apple SD Gothic Neo', sans-serif;
-      background: linear-gradient(#fff5f7, #ffffff);
+    }
+
+    /* 🔹 인트로 화면 */
+    .intro {
+      height: 100vh;
+      background: #111; /* 👉 여기 색 바꾸면 분위기 바뀜 */
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      color: #333;
+      padding: 20px;
     }
 
-    .container {
-      padding: 40px 20px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    h1 {
+    .intro h1 {
       font-size: 24px;
       margin-bottom: 10px;
     }
 
-    p {
+    .intro p {
       font-size: 16px;
-      line-height: 1.5;
+      opacity: 0.8;
     }
 
+    /* 🔹 버튼 */
     button {
       margin-top: 30px;
       padding: 15px;
-      width: 100%;
-      font-size: 18px;
+      width: 220px;
+      font-size: 16px;
       background: #ff7a8a;
       color: white;
       border: none;
@@ -48,13 +53,30 @@
     }
 
     button:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
 
-    #content {
+    /* 🔹 본문 */
+    .container {
       display: none;
-      margin-top: 30px;
+      padding: 40px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      background: linear-gradient(#fff5f7, #ffffff);
+      min-height: 100vh;
       animation: fadeIn 1.5s;
+    }
+
+    .container h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+      line-height: 1.6;
     }
 
     video, img {
@@ -63,14 +85,8 @@
       margin-top: 15px;
     }
 
-    .message {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: 500;
-    }
-
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
+      from {opacity: 0; transform: translateY(15px);}
       to {opacity: 1; transform: translateY(0);}
     }
   </style>
@@ -78,38 +94,45 @@
 
 <body>
 
-  <div class="container">
-    <h1>💌 저희에게 할 말이 있어요</h1>
-    <p>잠깐만 시간 내서 확인해 주세요 😊</p>
-
+  <!-- 🔥 인트로 -->
+  <div id="intro" class="intro">
+    <h1>잠깐만 시간 괜찮아?</h1>
+    <p>우리 얘기 하나만 들어줄래 😊</p>
     <button onclick="reveal()">확인하기</button>
+  </div>
 
-    <div id="content">
-      <h1>👶 아기가 찾아왔어요!</h1>
+  <!-- 🎉 공개 영역 -->
+  <div id="content" class="container">
+    <h1>👶 아기가 찾아왔어요!</h1>
 
-      <p class="message">
-        저희에게 정말 소중한 선물이 찾아왔습니다 💕<br>
-        따뜻하게 지켜봐 주세요
-      </p>
+    <p class="message">
+      저희에게 정말 소중한 선물이 찾아왔습니다 💕<br>
+      따뜻하게 지켜봐 주세요
+    </p>
 
-      <!-- 🎬 영상 -->
-      <video controls>
+    <!-- 🎬 영상 -->
+    <video controls playsinline>
       <source src="Secret_Video_d1gh86df2re8.mp4" type="video/mp4">
     </video>
 
-      <!-- 🖼 사진 -->
-      <img src="photo1.jpg">
-      <img src="photo2.jpg">
+    <!-- 🖼 사진 -->
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
 
-      <p class="message">
-        2026년, 우리에게 찾아온 기적 ✨
-      </p>
-    </div>
+    <p class="message">
+      2026년, 우리에게 찾아온 기적 ✨
+    </p>
   </div>
 
   <script>
     function reveal() {
-      document.getElementById("content").style.display = "block";
+      document.getElementById("intro").style.display = "none";
+
+      const content = document.getElementById("content");
+      content.style.display = "block";
+
+      // 👇 자연스럽게 스크롤
+      content.scrollIntoView({ behavior: "smooth" });
     }
   </script>
 
