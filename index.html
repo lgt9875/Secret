@@ -83,6 +83,23 @@
       font-size: 17px;
       line-height: 1.7;
     }
+
+    /* 컨테이너 페이드 */
+    .container {
+      display: none;
+      opacity: 0;
+      padding: 40px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      text-align: center;
+      background: #ffffff;
+      min-height: 100vh;
+      transition: opacity 1.5s ease;
+    }
+    
+    .container.show {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -103,7 +120,7 @@
   <!-- 🔹 본문 -->
   <div id="content" class="container">
 
-    <h1 class="fade-item">👶 새로운 가족이 찾아왔습니다</h1>
+    <h1 class="fade-item first">🌿 새로운 가족이 찾아왔습니다</h1>
 
     <p class="message fade-item">
       저희에게 소중한 생명이 찾아왔습니다.<br>
@@ -140,36 +157,31 @@
       setTimeout(() => {
         intro.style.display = "none";
         content.style.display = "block";
-
-        // 🎵 배경음 시작
+      
+        // 👉 컨테이너 자체 부드럽게 등장
+        setTimeout(() => {
+          content.classList.add("show");
+        }, 50);
+      
+        // 🎵 음악
         bgm.volume = 0.3;
         bgm.play();
-
-        // 🔥 순차 등장
+      
         const items = document.querySelectorAll(".fade-item");
+      
         items.forEach((el, index) => {
+      
+          // 👉 첫 문구는 더 천천히
+          const delay = el.classList.contains("first")
+            ? 800
+            : (index * 800) + 1200;
+      
           setTimeout(() => {
             el.classList.add("show");
-          }, index * 800);
+          }, delay);
+      
         });
-
-        // 🎬 영상 재생 시 배경음 정지
-        video.addEventListener("play", () => {
-          bgm.pause();
-        });
-
-        // 🎬 영상 끝나면 배경음 재생
-        video.addEventListener("ended", () => {
-          bgm.play();
-        });
-
-        // 🎬 영상 일시정지 시 (끝난 게 아니면) 배경음 재생
-        video.addEventListener("pause", () => {
-          if (!video.ended) {
-            bgm.play();
-          }
-        });
-
+      
       }, 1000);
     }
   </script>
