@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta property="og:title" content="까꿍이가 인사드려요">
-  <meta property="og:description" content="잠시만 확인해주세요 😊">
+  <meta property="og:title" content="전해드릴 말씀이 있습니다">
+  <meta property="og:description" content="잠시만 확인 부탁드립니다">
 
   <style>
     body {
@@ -75,14 +75,23 @@
       transform: translateY(0);
     }
 
+    /* 🔥 첫 등장 임팩트 */
     .fade-item.first.show {
-      animation: pop 0.6s ease;
+      animation: pop 0.6s ease, shake 0.5s 0.6s;
     }
 
     @keyframes pop {
       0% { transform: scale(0.7); opacity: 0; }
       80% { transform: scale(1.1); }
       100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
+      100% { transform: translateX(0); }
     }
 
     h1 {
@@ -108,51 +117,50 @@
 
 <body>
 
+<!-- 🎵 배경음 -->
 <audio id="bgm" loop>
   <source src="paulyudin-piano-piano-music-508963.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 인트로 -->
+<!-- 🔹 인트로 (서프라이즈 유지) -->
 <div id="intro" class="intro">
   <h1>
-    까꿍이가<br>
-    인사드려요 😊
+    전해드릴 말씀이<br>
+    있습니다
   </h1>
   <p>
     잠시만 시간 내어<br>
-    확인해주세요
+    확인 부탁드립니다
   </p>
-  <button onclick="reveal()">까꿍 👶</button>
+  <button onclick="reveal()">확인하기</button>
 </div>
 
-<!-- 본문 -->
+<!-- 🔹 본문 -->
 <div id="content" class="container">
 
-  <!-- 1. 등장 -->
+  <!-- 💥 여기서 까꿍 등장 -->
   <h1 class="fade-item first">
-    👶 안녕하세요<br>
+    👶 까꿍!<br>
     저는 까꿍이에요
   </h1>
 
-  <!-- 2. 인사 -->
   <p class="message fade-item">
-    할아버지 할머니 안녕하세요<br><br>
+    할아버지 할머니 안녕하세요 😊<br><br>
     엄마 아빠에게 찾아온<br>
-    소중한 아기예요 😊
+    소중한 아기예요
   </p>
 
-  <!-- 영상 -->
+  <!-- 🎬 영상 -->
   <video id="mainVideo" class="fade-item" controls playsinline>
     <source src="Secret_Video_d1gh86df2re8.mp4" type="video/mp4">
   </video>
 
-  <!-- 3. 만나는 시기 -->
   <p class="message fade-item">
     저는 지금 열심히 자라고 있어요 🌱<br><br>
     11월에 만나요 ❤️
   </p>
 
-  <!-- 4. 떡밥 -->
+  <!-- ❗ 다음 떡밥 -->
   <h1 class="fade-item">
     저는 과연...<br>
     아들일까요? 딸일까요? 🤭
@@ -193,6 +201,22 @@ function reveal() {
 
   }, 1000);
 }
+
+/* 🎯 영상 재생 시 BGM 제어 */
+const video = document.getElementById("mainVideo");
+const bgm = document.getElementById("bgm");
+
+video.addEventListener("play", () => {
+  bgm.pause();
+});
+
+video.addEventListener("pause", () => {
+  bgm.play();
+});
+
+video.addEventListener("ended", () => {
+  bgm.play();
+});
 </script>
 
 </body>
