@@ -64,20 +64,24 @@
       opacity: 1;
     }
 
+    /* 🔥 완전 숨김 상태 */
     .fade-item {
       opacity: 0;
       transform: translateY(15px);
       transition: all 1s;
+      visibility: hidden;
     }
 
+    /* 🔥 show 될 때만 보임 */
     .fade-item.show {
       opacity: 1;
       transform: translateY(0);
+      visibility: visible;
     }
 
     /* 첫 등장 효과 */
     .fade-item.first.show {
-      animation: pop 0.6s ease, shake 0.5s 0.6s;
+      animation: pop 0.6s ease forwards, shake 0.5s 0.6s;
     }
 
     @keyframes pop {
@@ -143,14 +147,13 @@
 
   <h1 class="fade-item first">
     👶 까꿍!<br>
-      할아버지 할머니 삼촌 이모 안녕하세요 😊<br><br>
+    할아버지 할머니 삼촌 이모 안녕하세요 😊<br><br>
   </h1>
 
   <p class="message fade-item">
-    저는 까꿍이에요<br>
+    저는 까꿍이에요~<br>
     엄마 아빠에게 찾아온<br>
-    소중한 아기예요
-    제 심장소리 한번 들어보실래요??
+    소중한 아기예요<br>
   </p>
 
   <video id="mainVideo" class="fade-item" controls playsinline webkit-playsinline>
@@ -159,8 +162,10 @@
 
   <p class="message fade-item">
     저는 지금 열심히 자라고 있어요 🌱<br><br>
-    건강하게 자라서 11월에 만나요.<br>
-    조금만 기다려 주세요 ❤️
+    쿵쾅쿵쾅 심자소리 잘 들리시나요??<br><br>
+    건강하게 자라서 11월에 만나요.<br><br>
+    조금만 기다려 주세요.❤️<br><br>
+    보고싶어요~
   </p>
 
   <h1 class="fade-item last-question">
@@ -206,7 +211,7 @@ function reveal() {
 
     fadeInBgm();
 
-    /* 🔥 순차 등장 (누적 방식) */
+    /* 🔥 순차 등장 */
     const items = document.querySelectorAll(".fade-item");
 
     let delay = 800;
