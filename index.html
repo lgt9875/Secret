@@ -52,12 +52,18 @@
     /* 🔹 본문 */
     .container {
       display: none;
+      opacity: 0;
       padding: 40px 20px;
       max-width: 500px;
       margin: 0 auto;
       text-align: center;
       background: #ffffff;
       min-height: 100vh;
+      transition: opacity 1.5s ease;
+    }
+
+    .container.show {
+      opacity: 1;
     }
 
     /* 👇 순차 등장 */
@@ -72,33 +78,24 @@
       transform: translateY(0);
     }
 
-    video, img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 15px;
+    /* 🔥 텍스트 안정화 */
+    h1 {
+      font-size: 24px;
+      line-height: 1.4;
+      word-break: keep-all;
     }
 
     .message {
       margin-top: 20px;
-      font-size: 17px;
-      line-height: 1.7;
+      font-size: 16px;
+      line-height: 1.8;
+      word-break: keep-all;
     }
 
-    /* 컨테이너 페이드 */
-    .container {
-      display: none;
-      opacity: 0;
-      padding: 40px 20px;
-      max-width: 500px;
-      margin: 0 auto;
-      text-align: center;
-      background: #ffffff;
-      min-height: 100vh;
-      transition: opacity 1.5s ease;
-    }
-    
-    .container.show {
-      opacity: 1;
+    video, img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 15px;
     }
   </style>
 </head>
@@ -112,20 +109,33 @@
 
   <!-- 🔹 인트로 -->
   <div id="intro" class="intro">
-    <h1>전해드릴 말씀이 있습니다</h1>
-    <p>잠시만 시간 내어 확인 부탁드립니다</p>
+    <h1>
+      전해드릴 말씀이<br>
+      있습니다
+    </h1>
+    <p>
+      잠시만 시간 내어<br>
+      확인 부탁드립니다
+    </p>
     <button onclick="reveal()">확인하기</button>
   </div>
 
   <!-- 🔹 본문 -->
   <div id="content" class="container">
 
-    <h1 class="fade-item first">🌿 새로운 가족이 찾아왔습니다</h1>
+    <!-- ✅ 2줄 고정 -->
+    <h1 class="fade-item first">
+      🌿 새로운 가족이<br>
+      찾아왔습니다
+    </h1>
 
     <p class="message fade-item">
-      저희에게 소중한 생명이 찾아왔습니다.<br>
-      기쁜 마음으로 이 소식을 전해드립니다.<br><br>
-      따뜻한 마음으로 지켜봐 주시면 감사하겠습니다.
+      저희에게 소중한 생명이<br>
+      찾아왔습니다.<br><br>
+      기쁜 마음으로 이 소식을<br>
+      전해드립니다.<br><br>
+      따뜻한 마음으로 지켜봐 주시면<br>
+      감사하겠습니다.
     </p>
 
     <!-- 🎬 영상 -->
@@ -134,7 +144,8 @@
     </video>
 
     <p class="message fade-item">
-      부족하지만 잘 준비하며 건강하게 지내겠습니다.<br>
+      부족하지만 잘 준비하며<br>
+      건강하게 지내겠습니다.<br><br>
       항상 감사드립니다.
     </p>
 
@@ -145,7 +156,6 @@
       const intro = document.getElementById("intro");
       const content = document.getElementById("content");
       const bgm = document.getElementById("bgm");
-      const video = document.getElementById("mainVideo");
 
       // 🔹 인트로 페이드 아웃
       intro.classList.add("fade-out");
@@ -153,31 +163,27 @@
       setTimeout(() => {
         intro.style.display = "none";
         content.style.display = "block";
-      
-        // 👉 컨테이너 자체 부드럽게 등장
+
         setTimeout(() => {
           content.classList.add("show");
         }, 50);
-      
+
         // 🎵 음악
         bgm.volume = 0.3;
         bgm.play();
-      
+
         const items = document.querySelectorAll(".fade-item");
-      
+
         items.forEach((el, index) => {
-      
-          // 👉 첫 문구는 더 천천히
           const delay = el.classList.contains("first")
             ? 800
             : (index * 800) + 1200;
-      
+
           setTimeout(() => {
             el.classList.add("show");
           }, delay);
-      
         });
-      
+
       }, 1000);
     }
   </script>
