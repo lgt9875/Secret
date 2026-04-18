@@ -75,7 +75,7 @@
       transform: translateY(0);
     }
 
-    /* 🔥 첫 등장 임팩트 */
+    /* 첫 등장 효과 */
     .fade-item.first.show {
       animation: pop 0.6s ease, shake 0.5s 0.6s;
     }
@@ -107,6 +107,13 @@
       word-break: keep-all;
     }
 
+    /* 마지막 질문 */
+    .last-question {
+      font-size: 20px;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
+
     video {
       width: 100%;
       border-radius: 10px;
@@ -122,7 +129,7 @@
   <source src="paulyudin-piano-piano-music-508963.mp3" type="audio/mpeg">
 </audio>
 
-<!-- 🔹 인트로 (서프라이즈 유지) -->
+<!-- 인트로 -->
 <div id="intro" class="intro">
   <h1>
     전해드릴 말씀이<br>
@@ -135,23 +142,23 @@
   <button onclick="reveal()">확인하기</button>
 </div>
 
-<!-- 🔹 본문 -->
+<!-- 본문 -->
 <div id="content" class="container">
 
-  <!-- 💥 여기서 까꿍 등장 -->
+  <!-- 💥 반전 -->
   <h1 class="fade-item first">
     👶 까꿍!<br>
     저는 까꿍이에요
   </h1>
 
   <p class="message fade-item">
-    할아버지 할머니 안녕하세요 😊<br><br>
+    할아버지 할머니 삼촌 이모 안녕하세요 😊<br><br>
     엄마 아빠에게 찾아온<br>
     소중한 아기예요
   </p>
 
-  <!-- 🎬 영상 -->
-  <video id="mainVideo" class="fade-item" controls playsinline>
+  <!-- 영상 -->
+  <video id="mainVideo" class="fade-item" controls playsinline webkit-playsinline>
     <source src="Secret_Video_d1gh86df2re8.mp4" type="video/mp4">
   </video>
 
@@ -160,8 +167,8 @@
     11월에 만나요 ❤️
   </p>
 
-  <!-- ❗ 다음 떡밥 -->
-  <h1 class="fade-item">
+  <!-- 마지막 -->
+  <h1 class="fade-item last-question">
     저는 과연...<br>
     아들일까요? 딸일까요? 🤭
   </h1>
@@ -169,10 +176,28 @@
 </div>
 
 <script>
+const bgm = document.getElementById("bgm");
+const video = document.getElementById("mainVideo");
+
+/* 🔥 부드러운 BGM 시작 */
+function fadeInBgm() {
+  bgm.volume = 0;
+  bgm.play();
+
+  let vol = 0;
+  const interval = setInterval(() => {
+    if (vol < 0.2) {
+      vol += 0.02;
+      bgm.volume = vol;
+    } else {
+      clearInterval(interval);
+    }
+  }, 200);
+}
+
 function reveal() {
   const intro = document.getElementById("intro");
   const content = document.getElementById("content");
-  const bgm = document.getElementById("bgm");
 
   intro.classList.add("fade-out");
 
@@ -184,8 +209,7 @@ function reveal() {
       content.classList.add("show");
     }, 50);
 
-    bgm.volume = 0.3;
-    bgm.play();
+    fadeInBgm();
 
     const items = document.querySelectorAll(".fade-item");
 
@@ -202,20 +226,22 @@ function reveal() {
   }, 1000);
 }
 
-/* 🎯 영상 재생 시 BGM 제어 */
-const video = document.getElementById("mainVideo");
-const bgm = document.getElementById("bgm");
-
+/* 🎯 영상 재생 시 BGM 완전 제거 */
 video.addEventListener("play", () => {
   bgm.pause();
+  bgm.currentTime = 0;
 });
 
-video.addEventListener("pause", () => {
-  bgm.play();
-});
-
+/* 영상 끝나면 다시 */
 video.addEventListener("ended", () => {
-  bgm.play();
+  fadeInBgm();
+});
+
+/* 일시정지 시도 대응 */
+video.addEventListener("pause", () => {
+  if (!video.ended) {
+    fadeInBgm();
+  }
 });
 </script>
 
