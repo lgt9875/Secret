@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
 
   <!-- 카톡 미리보기 -->
   <meta property="og:title" content="전해드릴 말씀이 있습니다">
@@ -19,7 +18,6 @@
     .intro {
       height: 100vh;
       background: linear-gradient(#fff1f3, #ffffff);
-      color: #333;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -33,6 +31,7 @@
       opacity: 0;
     }
 
+    /* 🔥 버튼 두근 효과 */
     button {
       margin-top: 30px;
       padding: 14px;
@@ -43,10 +42,13 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      animation: pulse 1.5s infinite;
     }
 
-    button:active {
-      transform: scale(0.96);
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
     }
 
     /* 🔹 본문 */
@@ -66,7 +68,7 @@
       opacity: 1;
     }
 
-    /* 👇 순차 등장 */
+    /* 등장 애니메이션 */
     .fade-item {
       opacity: 0;
       transform: translateY(15px);
@@ -78,7 +80,18 @@
       transform: translateY(0);
     }
 
-    /* 🔥 텍스트 안정화 */
+    /* 🔥 첫 문장 팝 효과 */
+    .fade-item.first.show {
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 텍스트 */
     h1 {
       font-size: 24px;
       line-height: 1.4;
@@ -92,10 +105,43 @@
       word-break: keep-all;
     }
 
-    video, img {
+    video {
       width: 100%;
       border-radius: 10px;
       margin-top: 15px;
+    }
+
+    /* 🔥 성별 리빌 오버레이 */
+    .reveal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 1s;
+      z-index: 999;
+    }
+
+    .reveal-overlay.show {
+      opacity: 1;
+    }
+
+    .reveal-overlay.pink {
+      background: #ffe4ec;
+    }
+
+    .reveal-overlay.blue {
+      background: #e3f2ff;
+    }
+
+    .reveal-overlay h1 {
+      font-size: 28px;
     }
   </style>
 </head>
@@ -123,7 +169,6 @@
   <!-- 🔹 본문 -->
   <div id="content" class="container">
 
-    <!-- ✅ 2줄 고정 -->
     <h1 class="fade-item first">
       🌿 새로운 가족이<br>
       찾아왔습니다
@@ -138,7 +183,6 @@
       감사하겠습니다.
     </p>
 
-    <!-- 🎬 영상 -->
     <video id="mainVideo" class="fade-item" controls playsinline>
       <source src="Secret_Video_d1gh86df2re8.mp4" type="video/mp4">
     </video>
@@ -149,6 +193,17 @@
       항상 감사드립니다.
     </p>
 
+    <!-- 🔥 감동 마무리 -->
+    <p class="message fade-item">
+      저희에게 와줘서<br>
+      정말 고마워 🤍
+    </p>
+
+  </div>
+
+  <!-- 🔥 성별 리빌 -->
+  <div id="revealOverlay" class="reveal-overlay">
+    <h1 id="revealText"></h1>
   </div>
 
   <script>
@@ -157,7 +212,6 @@
       const content = document.getElementById("content");
       const bgm = document.getElementById("bgm");
 
-      // 🔹 인트로 페이드 아웃
       intro.classList.add("fade-out");
 
       setTimeout(() => {
@@ -168,7 +222,6 @@
           content.classList.add("show");
         }, 50);
 
-        // 🎵 음악
         bgm.volume = 0.3;
         bgm.play();
 
@@ -186,6 +239,23 @@
 
       }, 1000);
     }
+
+    // 🎬 영상 끝 → 성별 공개
+    const video = document.getElementById("mainVideo");
+    const overlay = document.getElementById("revealOverlay");
+    const revealText = document.getElementById("revealText");
+
+    video.addEventListener("ended", () => {
+
+      const gender = "pink"; // 👉 여기만 바꾸면 됨 (pink / blue)
+
+      overlay.classList.add("show", gender);
+
+      revealText.innerHTML =
+        gender === "pink"
+          ? "🎀 공주님이 찾아왔어요"
+          : "💙 왕자님이 찾아왔어요";
+    });
   </script>
 
 </body>
